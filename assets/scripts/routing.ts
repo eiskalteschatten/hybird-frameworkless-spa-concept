@@ -20,7 +20,7 @@ function setLinks() {
         window.history.pushState({
           html: partialContents.html,
           title: partialContents.pageTitle
-        },"", link.href);
+        }, '', link.href);
       }
       else {
         throw new Error('The response code was not 200!');
@@ -30,7 +30,7 @@ function setLinks() {
       console.error(error);
       document.location = link.href;
     }
-  }));
+  })));
 }
 
 (function(): void {
