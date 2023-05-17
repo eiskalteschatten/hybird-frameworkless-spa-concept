@@ -1,3 +1,14 @@
+function setContents(html: string, title?: string): void {
+  const main = document.getElementById('main');
+
+  if (main) {
+    main.innerHTML = html;
+  }
+
+  document.title = title || 'Hybrid Frameworkless SPA Concept';
+  setLinks();
+}
+
 async function clickLink(link: HTMLAnchorElement): Promise<void> {
   const pageLoader = document.getElementById('pageLoader');
 
@@ -11,20 +22,14 @@ async function clickLink(link: HTMLAnchorElement): Promise<void> {
 
     if (response.status === 200) {
       const partialContents = await response.json();
-      const main = document.getElementById('main');
 
-      if (main) {
-        main.innerHTML = partialContents.html;
-      }
-
-      document.title = partialContents.title || 'Hybrid Frameworkless SPA Concept';
+      setContents(partialContents.html, partialContents.title);
 
       window.history.pushState({
         html: partialContents.html,
-        title: partialContents.pageTitle,
+        title: partialContents.title,
+        href: link.href,
       }, '', link.href);
-
-      setLinks();
     }
     else {
       throw new Error('The response code was not 200!');
@@ -51,6 +56,21 @@ function setLinks(): void {
   }));
 }
 
+const originalHtml = document.getElementById('main')?.innerHTML ?? 'An error occurred. Please reload the page.';
+const originalTitle = document.title;
+
 (function(): void {
   setLinks();
+
+  addEventListener('popstate', (e: PopStateEvent) => {
+    if (e.state?.html) {
+      setContents(e.state.html, e.state.title);
+    }
+    else if (e.state?.href) {
+      document.location = e.state.href;
+    }
+    else {
+      setContents(originalHtml, originalTitle);
+    }
+  });
 })();
