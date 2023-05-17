@@ -20,6 +20,7 @@
   "author": "Alex Seifert",
   "license": "ISC",
   "devDependencies": {
+    "@types/html-minifier": "^4.0.2",
     "@types/node": "^20.1.7",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
@@ -44,6 +45,7 @@
     "@fastify/view": "^7.4.1",
     "fastify": "^4.17.0",
     "handlebars": "^4.7.7",
+    "html-minifier": "^4.0.0",
     "pino": "^8.14.1",
     "pino-pretty": "^10.0.0"
   }

@@ -5,6 +5,7 @@ import helmet from '@fastify/helmet';
 import fastifyView from '@fastify/view';
 import handlebars from 'handlebars';
 import path from 'path';
+import minifier from 'html-minifier';
 
 const port = Number(process.env.PORT) || 4000;
 
@@ -28,6 +29,17 @@ app.register(fastifyView, {
   engine: { handlebars },
   root: './templates',
   propertyName: 'renderPartial',
+  options: {
+    useHtmlMinifier: minifier,
+    htmlMinifierOptions: {
+      removeComments: true,
+      removeCommentsFromCDATA: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeEmptyAttributes: true,
+    },
+  },
 });
 
 app.register(helmet, { global: true });
