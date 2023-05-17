@@ -1,8 +1,8 @@
 import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
 import helmet from '@fastify/helmet';
-// import fastifyView from '@fastify/view';
-// import ejs from 'ejs';
+import fastifyView from '@fastify/view';
+import handlebars from 'handlebars';
 import path from 'path';
 
 const port = Number(process.env.PORT) || 4000;
@@ -16,12 +16,18 @@ const app = Fastify({
   ignoreTrailingSlash: true,
 });
 
-// app.register(fastifyView, {
-//   engine: { ejs },
-//   root: './templates/blog',
-//   layout: 'layout.ejs',
-//   propertyName: 'blog',
-// });
+app.register(fastifyView, {
+  engine: { handlebars },
+  root: './templates',
+  layout: 'layout.hbs',
+  propertyName: 'fullPage',
+});
+
+app.register(fastifyView, {
+  engine: { handlebars },
+  root: './templates',
+  propertyName: 'partial',
+});
 
 app.register(helmet, { global: true });
 
