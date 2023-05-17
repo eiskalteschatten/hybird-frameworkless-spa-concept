@@ -11,10 +11,14 @@ function setContents(html: string, title?: string): void {
 
 async function clickLink(link: HTMLAnchorElement): Promise<void> {
   const pageLoader = document.getElementById('pageLoader');
+  let pageLoaderTimeout: NodeJS.Timeout | undefined;
 
   if (pageLoader) {
-    pageLoader.classList.remove('hidden');
-    pageLoader.classList.add('loading');
+    pageLoaderTimeout = setTimeout(() => {
+      pageLoader.classList.remove('hidden');
+      pageLoader.classList.add('loading');
+      clearTimeout(pageLoaderTimeout);
+    }, 200);
   }
 
   try {
@@ -41,6 +45,10 @@ async function clickLink(link: HTMLAnchorElement): Promise<void> {
   }
   finally {
     if (pageLoader) {
+      if (pageLoaderTimeout) {
+        clearTimeout(pageLoaderTimeout);
+      }
+
       pageLoader.classList.add('hidden');
       pageLoader.classList.remove('loading');
     }
