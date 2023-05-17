@@ -1,7 +1,7 @@
 function setLinks() {
   const links = document.querySelectorAll<HTMLAnchorElement>('a[data-link]');
 
-  links.forEach((link => link.addEventListener('click', async (e: Event) => {
+  links.forEach(link => link.addEventListener('click', async (e: Event) => {
     e.preventDefault();
 
     try {
@@ -19,7 +19,7 @@ function setLinks() {
 
         window.history.pushState({
           html: partialContents.html,
-          title: partialContents.pageTitle
+          title: partialContents.pageTitle,
         }, '', link.href);
       }
       else {
@@ -30,7 +30,7 @@ function setLinks() {
       console.error(error);
       document.location = link.href;
     }
-  })));
+  }));
 }
 
 (function(): void {
