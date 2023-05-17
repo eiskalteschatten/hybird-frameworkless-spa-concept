@@ -4,6 +4,13 @@ function setLinks() {
   links.forEach(link => link.addEventListener('click', async (e: Event) => {
     e.preventDefault();
 
+    const pageLoader = document.getElementById('pageLoader');
+
+    if (pageLoader) {
+      pageLoader.classList.remove('hidden');
+      pageLoader.classList.add('loading');
+    }
+
     try {
       const response = await fetch(`${link.href}?_partial`);
 
@@ -21,6 +28,8 @@ function setLinks() {
           html: partialContents.html,
           title: partialContents.pageTitle,
         }, '', link.href);
+
+        setLinks();
       }
       else {
         throw new Error('The response code was not 200!');
@@ -29,6 +38,12 @@ function setLinks() {
     catch (error: any) {
       console.error(error);
       document.location = link.href;
+    }
+    finally {
+      if (pageLoader) {
+        pageLoader.classList.add('hidden');
+        pageLoader.classList.remove('loading');
+      }
     }
   }));
 }
