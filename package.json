@@ -2,7 +2,7 @@
   "name": "hybrid-frameworkless-spa-concept",
   "version": "1.0.0",
   "description": "More information to follow...",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint \"./**/*.{tsx,ts,js,json}\"",
     "test": "npm run lint",
