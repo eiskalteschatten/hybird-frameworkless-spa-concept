@@ -1,23 +1,26 @@
 import { FastifyRequest } from 'fastify';
 
-import { FastifyInstanceWithView, FastifyReplyWithView } from '~/interfaces/fastify';
+import { FastifyInstanceWithView, FastifyReplyWithView, PartialQuery } from '~/interfaces/fastify';
 
 export default async (app: FastifyInstanceWithView) => {
-  const template = 'anotherPAge.hbs';
-  const title = 'Another Page';
+  app.get('/', async (req: FastifyRequest, reply: FastifyReplyWithView) => {
+    const template = 'anotherPage.hbs';
+    const title = 'Another Page';
+    // Cast PartialQuery here instead of using a generic type with FasityRequest
+    // because Fastify's types are buggy.
+    const query = req.query as PartialQuery;
 
-  app.get('/', (req: FastifyRequest, reply: FastifyReplyWithView) => {
-    reply.renderFullPage(template, {
+    if ('_partial' in query) {
+      const html = await app.renderPartial(template);
+
+      return reply.send({
+        title,
+        html,
+      });
+    }
+
+    return reply.renderFullPage(template, {
       title,
-    });
-  });
-
-  app.get('/_partial', async (req: FastifyRequest, reply: FastifyReplyWithView) => {
-    const html = await app.renderPartial(template);
-
-    reply.send({
-      title,
-      html,
     });
   });
 };

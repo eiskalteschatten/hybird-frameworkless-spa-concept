@@ -22,3 +22,7 @@ export interface FastifyInstanceWithView extends FastifyInstance {
   renderPartial<T extends { [key: string]: any }>(page: string, data: T, opts?: RouteSpecificOptions): Promise<string>;
   renderPartial(page: string, data?: object, opts?: RouteSpecificOptions): Promise<string>;
 }
+
+export interface PartialQuery {
+  _partial?: boolean;
+}
