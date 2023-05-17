@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
+import { fastifyAutoload } from '@fastify/autoload';
 import helmet from '@fastify/helmet';
 import fastifyView from '@fastify/view';
 import handlebars from 'handlebars';
@@ -19,7 +20,7 @@ const app = Fastify({
 app.register(fastifyView, {
   engine: { handlebars },
   root: './templates',
-  layout: 'layout.hbs',
+  layout: '../templates/layout.hbs',
   propertyName: 'renderFullPage',
 });
 
@@ -30,6 +31,10 @@ app.register(fastifyView, {
 });
 
 app.register(helmet, { global: true });
+
+app.register(fastifyAutoload, {
+  dir: path.join(__dirname, 'routes'),
+});
 
 app.register(fastifyStatic, {
   root: path.join(__dirname, '..', 'public'),
