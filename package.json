@@ -1,0 +1,36 @@
+{
+  "name": "hybrid-frameworkless-spa-concept",
+  "version": "1.0.0",
+  "description": "More information to follow...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Seifert",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.1.7",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.40.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.3",
+    "sass": "^1.62.1",
+    "ts-loader": "^9.4.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1"
+  },
+  "dependencies": {
+    "@fastify/helmet": "^10.1.1",
+    "@fastify/static": "^6.10.1",
+    "@fastify/view": "^7.4.1",
+    "fastify": "^4.17.0",
+    "pino": "^8.14.1",
+    "pino-pretty": "^10.0.0"
+  }
+}
