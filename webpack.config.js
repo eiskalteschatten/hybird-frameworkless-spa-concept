@@ -2,7 +2,6 @@ module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   devtool: 'inline-source-map',
   entry: {
-    bootstrap: { import: './assets/scripts/bootstrap.ts', filename: 'scripts/bootstrap.js' },
     async: { import: './assets/scripts/async.ts', filename: 'scripts/async.js' },
     important: { import: './assets/scripts/important.ts', filename: 'scripts/important.js' },
   },
