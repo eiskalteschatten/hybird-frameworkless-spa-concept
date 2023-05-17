@@ -11,7 +11,6 @@ export default async (app: FastifyInstanceWithView) => {
     const html = await app.renderPartial('home.hbs');
 
     reply.send({
-      title: 'Home',
       html,
     });
   });
