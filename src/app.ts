@@ -20,13 +20,13 @@ app.register(fastifyView, {
   engine: { handlebars },
   root: './templates',
   layout: 'layout.hbs',
-  propertyName: 'fullPage',
+  propertyName: 'renderFullPage',
 });
 
 app.register(fastifyView, {
   engine: { handlebars },
   root: './templates',
-  propertyName: 'partial',
+  propertyName: 'renderPartial',
 });
 
 app.register(helmet, { global: true });
