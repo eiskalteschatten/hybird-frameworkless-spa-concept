@@ -46,7 +46,24 @@ app.register(fastifyView, {
 
 app.register(renderer);
 
-app.register(helmet, { global: true });
+app.register(helmet, {
+  global: true,
+  contentSecurityPolicy: {
+    useDefaults: true,
+    directives: {
+      /* eslint-disable quotes */
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", 'https:', 'data:'],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrcAttr: ["'unsafe-inline'"],
+      frameSrc: ["'self'"],
+      /* eslint-enable quotes */
+      ...process.env.NODE_ENV === 'development' && {
+        'upgrade-insecure-requests': null,
+      },
+    },
+  },
+});
 
 app.register(fastifyAutoload, {
   dir: path.join(__dirname, 'routes'),
