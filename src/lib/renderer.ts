@@ -1,4 +1,4 @@
-import { FastifyRequest } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import fastifyPlugin from 'fastify-plugin';
 
 import { FastifyInstanceWithView, PartialQuery } from '~/interfaces/fastify';
@@ -11,7 +11,7 @@ export interface RenderOptions {
 }
 
 export default fastifyPlugin(function(fastify: FastifyInstanceWithView, options: Record<string, any>, done: () => void): void {
-  fastify.decorateReply('render', async function (renderOptions: RenderOptions): Promise<void> {
+  fastify.decorateReply('render', async function (renderOptions: RenderOptions): Promise<FastifyReply> {
     this.type('text/html');
 
     const { template, title, req, pageData } = renderOptions;
