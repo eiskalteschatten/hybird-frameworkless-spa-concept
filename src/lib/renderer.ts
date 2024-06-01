@@ -12,9 +12,9 @@ export interface RenderOptions {
 
 export default fastifyPlugin(function(fastify: FastifyInstanceWithView, options: Record<string, any>, done: () => void): void {
   fastify.decorateReply('render', async function (renderOptions: RenderOptions): Promise<void> {
-    const { template, title, req, pageData } = renderOptions;
     this.type('text/html');
 
+    const { template, title, req, pageData } = renderOptions;
     const query = req.query as PartialQuery;
 
     if ('_partial' in query) {
