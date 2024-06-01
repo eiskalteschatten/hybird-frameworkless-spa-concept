@@ -1,8 +1,6 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
-import { FastifyInstanceWithView } from '~/interfaces/fastify';
-
-export default async (app: FastifyInstanceWithView) => {
+export default async (app: FastifyInstance) => {
   app.get('/', async (req: FastifyRequest, reply: FastifyReply) => {
     return reply.render({
       template: 'anotherPage.hbs',
