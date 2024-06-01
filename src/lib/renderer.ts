@@ -6,16 +6,16 @@ import { FastifyInstanceWithView, PartialQuery } from '~/interfaces/fastify';
 export interface RenderOptions {
   template: string;
   title?: string;
-  request: FastifyRequest;
+  req: FastifyRequest;
   pageData?: Record<string, any>;
 }
 
 export default fastifyPlugin(function(fastify: FastifyInstanceWithView, options: Record<string, any>, done: () => void): void {
   fastify.decorateReply('render', async function (renderOptions: RenderOptions): Promise<void> {
-    const { template, title, request, pageData } = renderOptions;
+    const { template, title, req, pageData } = renderOptions;
     this.type('text/html');
 
-    const query = request.query as PartialQuery;
+    const query = req.query as PartialQuery;
 
     if ('_partial' in query) {
       const html = await fastify.renderPartial(template, { ...pageData });
