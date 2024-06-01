@@ -58,10 +58,12 @@ async function clickLink(link: HTMLAnchorElement): Promise<void> {
 function setLinks(): void {
   const links = document.querySelectorAll<HTMLAnchorElement>('a[data-link]');
 
-  links.forEach(link => link.addEventListener('click', async (e: Event) => {
-    e.preventDefault();
-    await clickLink(link);
-  }));
+  if (links.length > 0) {
+    links.forEach(link => link.addEventListener('click', async (e: Event) => {
+      e.preventDefault();
+      await clickLink(link);
+    }));
+  }
 }
 
 const originalHtml = document.getElementById('main')?.innerHTML ?? 'An error occurred. Please reload the page.';
