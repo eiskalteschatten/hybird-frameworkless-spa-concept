@@ -1,5 +1,7 @@
 import { FastifyInstance, FastifyReply } from 'fastify';
 
+import { RenderOptions } from '~/lib/renderer';
+
 // Copied from node_modules/@fastify/types/index.d.ts
 interface RouteSpecificOptions {
   layout?: string;
@@ -12,6 +14,7 @@ export interface FastifyReplyWithView extends FastifyReply {
   renderFullPage(page: string, data?: object, opts?: RouteSpecificOptions): FastifyReply;
   renderPartial<T extends { [key: string]: any }>(page: string, data: T, opts?: RouteSpecificOptions): FastifyReply;
   renderPartial(page: string, data?: object, opts?: RouteSpecificOptions): FastifyReply;
+  render(renderOptions: RenderOptions): FastifyReply;
 }
 
 // Temporary workaround for https://github.com/fastify/point-of-view/issues/301

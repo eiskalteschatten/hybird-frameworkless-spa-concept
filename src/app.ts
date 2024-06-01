@@ -7,6 +7,8 @@ import handlebars from 'handlebars';
 import path from 'path';
 import minifier from 'html-minifier';
 
+import renderer from './lib/renderer';
+
 const port = Number(process.env.PORT) || 4000;
 
 const app = Fastify({
@@ -41,6 +43,8 @@ app.register(fastifyView, {
     },
   },
 });
+
+app.register(renderer);
 
 app.register(helmet, { global: true });
 

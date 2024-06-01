@@ -45,6 +45,7 @@
     "@fastify/view": "^7.4.1",
     "bootstrap": "^5.2.3",
     "fastify": "^4.17.0",
+    "fastify-plugin": "^4.5.1",
     "handlebars": "^4.7.7",
     "html-minifier": "^4.0.0",
     "pino": "^8.14.1",
