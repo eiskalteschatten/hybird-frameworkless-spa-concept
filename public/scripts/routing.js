@@ -1,6 +1,6 @@
 const navStartEvent = new Event('navigationStart', { cancelable: true });
 const navEndEvent = new Event('navigationEnd');
-\
+
 function setContents(html, title) {
   const main = document.getElementById('main');
 
@@ -58,8 +58,9 @@ async function clickLink(link) {
 
       pageLoader.classList.add('hidden');
       pageLoader.classList.remove('loading');
-      document.dispatchEvent(navEndEvent);
     }
+
+    document.dispatchEvent(navEndEvent);
   }
 }
 
