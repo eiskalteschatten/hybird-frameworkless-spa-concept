@@ -9,6 +9,7 @@ function setContents(html, title) {
   }
 
   document.title = title || 'Hybrid Frameworkless SPA Concept';
+  window.scrollTo({ top: 0, behavior: 'instant' });
   setLinks();
 }
 
