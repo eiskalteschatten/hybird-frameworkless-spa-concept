@@ -6,13 +6,11 @@
   "scripts": {
     "lint": "eslint \"./**/*.{tsx,ts,js,json}\"",
     "test": "npm run lint",
-    "prebuild": "webpack",
     "build": "tsc",
     "postbuild": "sass assets/styles:public/dist/css --style compressed",
     "dev:backend": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --rs --inspect=0.0.0.0:9229 -- src/main.ts",
-    "dev:frontend": "cross-env NODE_ENV=development webpack --watch",
     "dev:scss": "sass --watch assets/styles:public/dist/css",
-    "dev": "concurrently  \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:scss\"",
+    "dev": "concurrently  \"npm run dev:backend\" \"npm run dev:scss\"",
     "prestart": "node ./dist/bootstrap.js",
     "start": "node ./dist/main.js",
     "prepare": "husky install"
@@ -32,11 +30,8 @@
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^9.0.11",
     "sass": "^1.62.1",
-    "ts-loader": "^9.4.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.0.4",
-    "webpack": "^5.82.1",
-    "webpack-cli": "^5.1.1"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "@fastify/autoload": "^5.7.1",

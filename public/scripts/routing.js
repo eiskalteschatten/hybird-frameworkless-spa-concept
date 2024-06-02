@@ -1,4 +1,4 @@
-function setContents(html: string, title?: string): void {
+function setContents(html, title) {
   const main = document.getElementById('main');
 
   if (main) {
@@ -9,9 +9,9 @@ function setContents(html: string, title?: string): void {
   setLinks();
 }
 
-async function clickLink(link: HTMLAnchorElement): Promise<void> {
+async function clickLink(link) {
   const pageLoader = document.getElementById('pageLoader');
-  let pageLoaderTimeout: NodeJS.Timeout | undefined;
+  let pageLoaderTimeout;
 
   if (pageLoader) {
     pageLoaderTimeout = setTimeout(() => {
@@ -39,7 +39,7 @@ async function clickLink(link: HTMLAnchorElement): Promise<void> {
       throw new Error('The response code was not 200!');
     }
   }
-  catch (error: any) {
+  catch (error) {
     console.error(error);
     document.location = link.href;
   }
@@ -55,24 +55,28 @@ async function clickLink(link: HTMLAnchorElement): Promise<void> {
   }
 }
 
-function setLinks(): void {
-  const links = document.querySelectorAll<HTMLAnchorElement>('a[data-app-link="false"]');
+function setLinks() {
+  const links = document.querySelectorAll('a[data-app-link="false"]');
 
   if (links && links.length > 0) {
-    links.forEach(link => link.addEventListener('click', async (e: Event) => {
-      e.preventDefault();
-      await clickLink(link);
-    }));
+    links.forEach(link => {
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        await clickLink(link);
+      });
+
+      link.setAttribute('data-app-link', 'true');
+    });
   }
 }
 
 const originalHtml = document.getElementById('main')?.innerHTML ?? 'An error occurred. Please reload the page.';
 const originalTitle = document.title;
 
-(function(): void {
+(function() {
   setLinks();
 
-  addEventListener('popstate', (e: PopStateEvent) => {
+  addEventListener('popstate', (e) => {
     if (e.state?.html) {
       setContents(e.state.html, e.state.title);
     }
