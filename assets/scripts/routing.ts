@@ -56,7 +56,7 @@ async function clickLink(link: HTMLAnchorElement): Promise<void> {
 }
 
 function setLinks(): void {
-  const links = document.querySelectorAll<HTMLAnchorElement>('a[data-link]');
+  const links = document.querySelectorAll<HTMLAnchorElement>('a[data-app-link="false"]');
 
   if (links && links.length > 0) {
     links.forEach(link => link.addEventListener('click', async (e: Event) => {
